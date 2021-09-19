@@ -1,0 +1,34 @@
+.appContainer{
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  
+  justify-content: center;
+  align-items: center;
+}
+
+.app{
+  width: 700px;
+  background-color: #fff;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.headerTitle{
+  display: inline-block;
+}
+.navigation{
+  display: inline-block;
+}
+.containerPage{
+  min-height: 300px;
+  background-color: rgb(245, 243, 243);
+}
