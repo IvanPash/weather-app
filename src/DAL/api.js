@@ -1,5 +1,6 @@
 import * as axios from "axios";
 
+
 const instanseAxiosWeather = axios.create({
   baseURL: "https://api.openweathermap.org/data/2.5",
   params: {
@@ -29,9 +30,7 @@ let API = {
       from_bound: { value: "city" },
       to_bound: { value: "city" },
     };
-    return instanseAxiosCity.post("", params).then((response) => {
-      console.log(response.data);
-    });
+    return instanseAxiosCity.post("", params)
   },
 };
 

@@ -7,7 +7,7 @@ let WeatherToday = (props) => {
     <div className={s.container}>
       <h4>{props.weather.name}</h4>
       
-      <button></button>
+      
     </div>
   );
 };

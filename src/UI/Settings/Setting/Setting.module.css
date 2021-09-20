@@ -1,0 +1,41 @@
+.settingsItem{
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+.settingLeft{
+  display: inline-block;
+  margin: 5px 10px 5px 0;
+  cursor: pointer;
+}
+.settingRight{
+  display: flex;
+  flex-flow: column;
+}
+.description{
+  font-size: 13px;
+  color: rgb(158, 158, 158);
+}
+.inputCity{
+  margin-top: 5px;
+  min-width: 300px;
+  padding: 10px 10px;
+  border: 1px solid rgb(212, 212, 212);
+  border-radius: 3px;
+}
+.hintCityContainer {
+  margin-top: 13px;
+}
+.hintCity{
+  display: inline-block;
+  padding: 3px 6px;
+  background-color: rgb(229, 226, 226);
+  border-radius: 7px;
+  margin: 0 5px 5px 0;
+  cursor: pointer;
+  transition: all .15s ease;
+  font-size: 14px;
+}
+.hintCity:hover{
+  background-color: rgb(212, 209, 209);
+}

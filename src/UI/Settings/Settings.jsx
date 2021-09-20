@@ -1,39 +1,38 @@
-import * as axios from "axios";
-import API from "../../DAL/api";
+import Setting from "./Setting/Setting";
 import s from "./Settings.module.css";
 
 const Settings = (props) => {
-  let getCity = () => {
-    API.getCity("Моск")
-    axios
-      .post(
-        "https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address", // url
-        { query: "Вла" }, // data
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: "Token " + "5e332d1c033a2bc229cd5ccbf1a4f97264059c9d",
-          },
-          // Может быть надо, а может быть нет
-        }
-      )
-      .then(function (response) {
-        console.log(response); // Здесь обработать ответ как надо
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      return;
+    }
+  }
+  function showPosition(position) {
+    console.log("latitude" + position.coords.latitude + "<br>Longitude: " + position.coords.longitude);
+  }
   return (
     <div className={s.container}>
-      <h4>Настройки</h4>
-      <div>
-        {" "}
-        Введите город
-        {/* <input id className={}/> */}
+      <h4 className={s.title}>Настройки</h4>
+      <span>текущие координаты {props.selectedCoordsCity.lat} и {props.selectedCoordsCity.lon}</span>
+      <ul className={s.settingsList}>
+        {props.settingTypes.map((el) => (
+          <Setting
+            key={el.id}
+            {...el}
+            hintsCity={props.hintsCity}
+            input={props.input}
+            setSettingTypeUI={props.setSettingTypeUI}
+            setInputUI={props.setInputUI}
+            setCoordsCityUI={props.setCoordsCityUI}
+          />
+        ))}
+      </ul>
+      <button onClick={getLocation}>Получить координаты по IP</button>
+      <div className={s.buttonSaveContainer}>
+        <button className={s.buttonSave}>Сохранить</button>
       </div>
-      <button onClick={getCity}>Получить город</button>
     </div>
   );
 };

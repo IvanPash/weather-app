@@ -29,6 +29,7 @@
   display: inline-block;
 }
 .containerPage{
+  position: relative;
   min-height: 300px;
   background-color: rgb(245, 243, 243);
 }
