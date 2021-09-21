@@ -1,74 +1,248 @@
 import API from "../../DAL/api";
 
 const initState = {
-  settingTypes: [
-    { id: 1, selected: false, type: "ip", text: "Определять по IP-адресу" },
-    { id: 2, selected: true, type: "input", text: "Найти город" },
+  settingsTypes: [
+    {
+      id: 1,
+      selected: false,
+      type: "ip",
+      title: "Определять по IP-адресу",
+      coords: { lat: "", lon: "" },
+      loading: false,
+      error: { status: false, description: "" },
+    },
+    {
+      id: 2,
+      selected: true,
+      type: "input",
+      title: "Выберите город",
+      coords: { lat: "", lon: "" },
+      loading: false,
+      error: { status: false, description: "" },
+
+      input: {
+        inputValue: "",
+        placeholder: "Поиск",
+      },
+      hints: [
+        {
+          id: 1,
+          data: { lat: "", lon: "" },
+          value: "",
+        },
+      ],
+    },
   ],
-  input: {
-    inputValue: "",
-    placeholder: "Поиск",
-  },
-  hintsCity: [],
-  selectedCoordsCity: { lat: "", lon: "" },
-  // { id: "", data: { geo_lat: "", geo_lon: "" }, value: "" }
+  buttonSave: true
 };
 
 let reducerSettings = (state = initState, action) => {
   switch (action.type) {
-    case SET_SETTING_TYPE: {
+    case SET_SELECTED_SETTING: {
+      // let settingsTypesIndex = state.settingsTypes.findIndex((index) => {index.id === action.id})
       let stateCopy = {
         ...state,
-        settingTypes: state.settingTypes.map((el) => {
-          if (el.type == action.selectedType) {
-            return { ...el, selected: true };
-          } else {
-            return { ...el, selected: false };
-          }
-        }),
+        settingsTypes: [
+          ...state.settingsTypes.map((el) => {
+            if (el.id === action.id) {
+              return { ...el, selected: true };
+            } else {
+              return { ...el, selected: false };
+            }
+          }),
+        ],
+      };
+      return stateCopy;
+    }
+    case SET_COORDS_SETTING: {
+      let stateCopy = {
+        ...state,
+        settingsTypes: [
+          ...state.settingsTypes.map((el) => {
+            if (el.id === action.id && action.important){
+              return { ...el, coords: { ...el.coords, lat: action.lat, lon: action.lon } };
+            }
+            else if (el.id === action.id && el.selected) {
+              return { ...el, coords: { ...el.coords, lat: action.lat, lon: action.lon } };
+            } else {
+              return el;
+            }
+          }),
+        ],
+      };
+      return stateCopy;
+    }
+    case SET_LOADING_STATUS_SETTING: {
+      let stateCopy = {
+        ...state,
+        settingsTypes: [
+          ...state.settingsTypes.map((el) => {
+            if (el.id === action.id && el.selected) {
+              return { ...el, loading: action.status };
+            } else {
+              return el;
+            }
+          }),
+        ],
       };
       return stateCopy;
     }
 
-    case SET_INPUT: {
+    case SET_ERROR_SETTING: {
       let stateCopy = {
         ...state,
-        input: { ...state.input, inputValue: action.value },
-      };
-      API.getCity(action.value).then((response) => {
-        stateCopy.hintsCity = [];
-
-        let responseData = response.data.suggestions;
-        for (let i = 0; i < responseData.length; i++) {
-          stateCopy.hintsCity.push({
-            id: i,
-            data: { geo_lat: responseData[i].data.geo_lat, geo_lon: responseData[i].data.geo_lon },
-            value: responseData[i].value,
-          });
-        }
-      });
-      return stateCopy;
-    }
-
-    case SET_COORDS_CITY: {
-      let stateCopy = {
-        ...state,
-        input: { ...state.input, inputValue: action.obj.value },
-        selectedCoordsCity: { ...state.selectedCoordsCity, lat: action.obj.data.geo_lat, lon: action.obj.data.geo_lon },
+        settingsTypes: [
+          ...state.settingsTypes.map((el) => {
+            if (el.id === action.id ) {
+              return { ...el, error: { status: action.status, description: action.description } };
+            } else {
+              return el;
+            }
+          }),
+        ],
       };
       return stateCopy;
     }
+
+    case SET_INPUT_VALUE_SETTING: {
+      let stateCopy = {
+        ...state,
+        settingsTypes: [
+          ...state.settingsTypes.map((el) => {
+            if (el.id === action.id && el.selected && el.input) {
+              return {
+                ...el,
+                input: { ...el.input, inputValue: action.value },
+                coords: { ...el.coords, lat: "", lon: "" },
+              };
+            } else {
+              return el;
+            }
+          }),
+        ],
+      };
+      return stateCopy;
+    }
+
+    case SET_HINTS_SETTING: {
+      let stateCopy = {
+        ...state,
+        settingsTypes: [
+          ...state.settingsTypes.map((el) => {
+            if (el.id === action.id && el.selected && el.input) {
+              return { ...el, hints: action.hintsArray };
+            } else {
+              return el;
+            }
+          }),
+        ],
+      };
+      return stateCopy;
+    }
+
+    case SET_SAVE_BUTTON_SETTING: {
+      let stateCopy ={...state}
+      let selectIdSetting = state.settingsTypes.findIndex((index) => index.id === action.id)
+      let coords = state.settingsTypes[selectIdSetting].coords
+      if(coords.lon && coords.lat){
+        stateCopy.buttonSave = false;
+      } 
+      else{
+        stateCopy.buttonSave = true;
+      }
+      return stateCopy;
+    }
+
     default:
       return state;
   }
 };
 
-const SET_SETTING_TYPE = "SET-SETTING-TYPE";
-const SET_INPUT = "SET-INPUT";
-const SET_COORDS_CITY = "SET-COORDS-CITY";
+// TypeActions
+const SET_SELECTED_SETTING = "SET_SELECTED_SETTING";
+const SET_COORDS_SETTING = "SET_COORDS_SETTING";
+const SET_LOADING_STATUS_SETTING = "SET_LOADING_STATUS_SETTING";
+const SET_ERROR_SETTING = "SET_ERROR_SETTING";
+const SET_INPUT_VALUE_SETTING = "SET_INPUT_VALUE_SETTING";
+const SET_HINTS_SETTING = "SET_HINTS_SETTING";
+const SET_SAVE_BUTTON_SETTING = "SET_SAVE_BUTTON_SETTING";
 
-export const setSettingTypeAC = (selectedType) => ({ type: SET_SETTING_TYPE, selectedType });
-export const setInputAC = (value) => ({ type: SET_INPUT, value });
-export const setCoordsCityAC = (obj) => ({ type: SET_COORDS_CITY, obj });
+// ActionCreators
+export const setSelectedSettingAC = (id) => ({ type: SET_SELECTED_SETTING, id });
+export const setCoordsSettingAC = (id, lat, lon, important = false) => ({ type: SET_COORDS_SETTING, id, lat, lon, important });
+export const setLoadingStatusSettingAC = (id, status) => ({ type: SET_LOADING_STATUS_SETTING, id, status });
+export const setErrorSettingAC = (id, status, description = "") => ({
+  type: SET_ERROR_SETTING,
+  id,
+  status,
+  description,
+});
+export const setInputValueSettingAC = (id, value) => ({ type: SET_INPUT_VALUE_SETTING, id, value });
+export const setHintsSettingAC = (id, hintsArray) => ({ type: SET_HINTS_SETTING, id, hintsArray });
+export const setSaveButtonSettingAC = (id) => ({ type: SET_SAVE_BUTTON_SETTING, id});
+
+// ThunkCreators
+export const getCitiesInputSettingTC = (id, value) => (dispatch) => {
+  dispatch(setInputValueSettingAC(id, value));
+
+  if (value != "") {
+    let hintsCity = [];
+
+    dispatch(setLoadingStatusSettingAC(id, true));
+
+    API.getCity(value).then((response) => {
+      let responseData = response.data.suggestions;
+      for (let i = 0; i < responseData.length; i++) {
+        hintsCity.push({
+          id: i,
+          data: { lat: responseData[i].data.geo_lat, lon: responseData[i].data.geo_lon },
+          value: responseData[i].value,
+        });
+      }
+      dispatch(setHintsSettingAC(id, hintsCity));
+      dispatch(setLoadingStatusSettingAC(id, false));
+    });
+  }
+};
+export const getCoordinatesForCityTC = (id, hintsObj) => (dispatch) => {
+  dispatch(setInputValueSettingAC(id, hintsObj.value));
+  dispatch(setCoordsSettingAC(id, hintsObj.data.lat, hintsObj.data.lon));
+  dispatch(setHintsSettingAC(id, []));
+  dispatch(setSaveButtonSettingAC(id))
+};
+
+export const setSelectedSettingTC = (id, typeSetting) => (dispatch) => {
+  
+  if (typeSetting == "ip") {
+    dispatch(setLoadingStatusSettingAC(id, true));
+    let PositionSucces = (position) => {
+      dispatch(setSelectedSettingAC(id));
+      dispatch(setCoordsSettingAC(id, position.coords.latitude, position.coords.longitude ))
+      dispatch(setLoadingStatusSettingAC(id, false));
+      dispatch(setSaveButtonSettingAC(id))
+    }
+    let PositionError = (error) => {
+      dispatch(setLoadingStatusSettingAC(id, false));
+      dispatch(setCoordsSettingAC(id, "", "", true ))
+      dispatch(setErrorSettingAC(id, true, "Вы не разрешили использовать службу геолокации"))
+      console.log(`ERROR(${error.code}): ${error.message}`)
+      dispatch(setSaveButtonSettingAC(id))
+    }
+    if (navigator.geolocation) {
+      dispatch(setErrorSettingAC(id, false))
+      navigator.geolocation.getCurrentPosition(PositionSucces, PositionError);
+    } else {
+      dispatch(setErrorSettingAC(id, true, "Ваш браузер не поддерживает"))
+      dispatch(setCoordsSettingAC(id, "", "", true))
+      dispatch(setSaveButtonSettingAC(id))
+    }
+  } 
+  else {
+    dispatch(setSelectedSettingAC(id));
+    dispatch(setSaveButtonSettingAC(id))
+  }
+  
+  
+};
 
 export default reducerSettings;

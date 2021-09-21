@@ -29,6 +29,7 @@ let API = {
       // настройка - только города
       from_bound: { value: "city" },
       to_bound: { value: "city" },
+      count: 4
     };
     return instanseAxiosCity.post("", params)
   },

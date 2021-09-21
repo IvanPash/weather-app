@@ -3,22 +3,20 @@ import s from "./Setting.module.css";
 
 const Setting = (props) => {
   let inputLink = React.createRef();
-
-  let setSettingType = (selectedType) => {
-    props.setSettingTypeUI(selectedType);
-  };
-  let setInput = () => {
+  let setInput = (id) => {
+    debugger
     let value = inputLink.current.value;
-    props.setInputUI(value);
+    props.getCitiesInputSettingUI(id, value)
   };
-  let setCoordsCity = (obj) => {
-    props.setCoordsCityUI(obj);
-  };
-
-  // let getCity = () => {
-  //   console.log("ggg");
-  //   // API.getCity("Моск")
+  // let setSettingType = (selectedType) => {
+  //   props.setSettingTypeUI(selectedType);
   // };
+  
+  
+  // let setCoordsCity = (obj) => {
+  //   props.selected && props.setCoordsCityUI(obj);
+  // };
+
   return (
     <li className={s.settingsItem}>
       <input
@@ -26,31 +24,34 @@ const Setting = (props) => {
         id={props.type}
         type="radio"
         checked={props.selected}
-        onClick={() => setSettingType(props.type)}
+        onClick={() => props.setSelectedSettingUI(props.id, props.type)}
         readOnly
       />
-      <div className={s.settingRight}>
-        <span className={s.typeTitle}>{props.text}</span>
-
-        {props.type === "ip" && <span className={s.description}>загрузка...</span>}
+      <div className={`${s.settingRight} ${props.selected && s.active}`}>
+        <span className={s.typeTitle}>{props.title}</span>
+        <span className={s.description}>{props.loading ? "загрузка..." : "✔"}</span>
+        <span className={s.description}>широта {props.coords.lat} , долгота {props.coords.lon}</span>
+        {props.error.status && <span className={s.typeTitle}>Ошибка: {props.error.description}</span>}
         {props.type === "input" && (
-          <div>
+          <div className={s.inputCityContainer}>
+            <div className={s.hintCityContainer}>
+              <div className={s.hintCitiInner}>
+                {props.hints.map((el) => (
+                  <span onClick={() => props.getCoordinatesForCityUI(props.id, el)} className={s.hintCity}>
+                    {el.value}
+                  </span>
+                ))}
+              </div>
+            </div>
             <input
               className={s.inputCity}
               id="city"
               type="text"
               ref={inputLink}
-              onChange={() => setInput()}
+              onChange={() => setInput(props.id)}
               placeholder={props.input.placeholder}
               value={props.input.inputValue}
             />
-            <div className={s.hintCityContainer}>
-              {props.hintsCity.map((el) => (
-                <span onClick={() => setCoordsCity({ ...el })} className={s.hintCity}>
-                  {el.value}
-                </span>
-              ))}
-            </div>
           </div>
         )}
       </div>

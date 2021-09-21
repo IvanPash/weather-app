@@ -1,25 +1,23 @@
 import { connect } from "react-redux";
-import { setCoordsCityAC, setInputAC, setSettingTypeAC } from "../../BLL/reducers/reducer-settings";
+import { getCitiesInputSettingTC, getCoordinatesForCityTC, setSelectedSettingTC } from "../../BLL/reducers/reducer-settings";
 import Settings from "./Settings";
 
 const mapStateToProps = (state) =>{
   return {
-    settingTypes: state.settingsPage.settingTypes,
-    input: state.settingsPage.input,
-    hintsCity: state.settingsPage.hintsCity,
-    selectedCoordsCity: state.settingsPage.selectedCoordsCity
+    settingsTypes: state.settingsPage.settingsTypes,
+    buttonSave: state.settingsPage.buttonSave
   }
 }
 const mapDispatchToProps = (dispatch) =>{
   return {
-    setSettingTypeUI: (selectedType) => {
-      dispatch(setSettingTypeAC(selectedType))
+    setSelectedSettingUI: (id, typeSetting) => {
+      dispatch(setSelectedSettingTC(id, typeSetting))
     },
-    setInputUI: (value) => {
-      dispatch(setInputAC(value))
+    getCitiesInputSettingUI: (id,value) => {
+      dispatch(getCitiesInputSettingTC(id,value))
     },
-    setCoordsCityUI: (obj) => {
-      dispatch(setCoordsCityAC(obj))
+    getCoordinatesForCityUI: (id, hintsObj) => {
+      dispatch(getCoordinatesForCityTC(id, hintsObj))
     }
   }
 }

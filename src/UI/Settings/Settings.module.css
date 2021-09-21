@@ -28,6 +28,11 @@
 .buttonSave:hover{
   background-color: rgb(19, 89, 180);
 }
+.buttonSave:disabled{
+  background-color: rgb(192, 192, 192);
+  pointer-events: none;
+  cursor: none;
+}
 .title{
   margin-top: 0;
   font-size: 20px;
