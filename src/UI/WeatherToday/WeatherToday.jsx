@@ -2,8 +2,8 @@ import React from "react";
 import s from "./WeatherToday.module.css";
 
 let WeatherToday = (props) => {
-  let image = props.currentWeather.weather[0].icon
-  var date = new Date(props.currentWeather.dt * 1000).toLocaleDateString("en-GB")
+  let image = props.currentWeather.weather[0].icon;
+  var date = new Date(props.currentWeather.dt * 1000).toLocaleDateString("en-GB");
   debugger;
   let ConvertTemperature = (temp) => {
     let integer = Math.floor(temp);
@@ -14,12 +14,17 @@ let WeatherToday = (props) => {
   return (
     <div className={`${s.box} containerWeather`}>
       <div className={`${s.loadingWrapper} ${props.loading && s.active}`}>
-        <img className={s.loading} src="https://i.stack.imgur.com/ATB3o.gif"/>
+        <img className={s.loading} src="https://i.stack.imgur.com/ATB3o.gif" />
       </div>
-      
+
       <div className={s.boxRight}>
         <div className={s.mainInfo}>
-          <h3 className={s.mainInfoCity}>Город</h3>
+          <div>
+            <h3 className={s.mainInfoCity}>Город</h3>
+            <span className={s.coordinate}>
+              погода по координатам: широта {props.coords.lat} , долгота {props.coords.lon}
+            </span>
+          </div>
           <span className={s.mainInfoDate}>{date}</span>
           <div className={s.mainInfoTemp}>
             <span className={s.temperature}>{ConvertTemperature(props.currentWeather.temp)}</span>
@@ -33,7 +38,7 @@ let WeatherToday = (props) => {
             </div>
           </div>
           <div className={s.detailBox}>
-            <div className={s.detailBoxItem}>
+            {/* <div className={s.detailBoxItem}>
               <span className={s.detailBoxItemTitle}>тип</span>
               <span className={s.detailBoxItemData}>данные</span>
             </div>
@@ -52,7 +57,7 @@ let WeatherToday = (props) => {
             <div className={s.detailBoxItem}>
               <span className={s.detailBoxItemTitle}>тип</span>
               <span className={s.detailBoxItemData}>данные</span>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

@@ -9,7 +9,7 @@ class WeatherTodayContainer extends React.Component {
   }
   render(){
     return (
-      <WeatherToday currentWeather={this.props.currentWeather} loading={this.props.loading}/>
+      <WeatherToday currentWeather={this.props.currentWeather} loading={this.props.loading} coords={this.props.coords}/>
     )
   }
 }

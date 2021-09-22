@@ -36,7 +36,8 @@ const initState = JSON.parse(localStorage.getItem("settings"))
         },
       ],
       buttonSave: true,
-      coordsSave: {lat: "", lon: ""}
+      coordsSave: {lat: "", lon: ""},
+      city: "",
     };
 
 let reducerSettings = (state = initState, action) => {

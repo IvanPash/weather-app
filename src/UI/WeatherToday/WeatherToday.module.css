@@ -1,6 +1,4 @@
-.container{
-  
-}
+
 .box{
   position: relative;
   display: flex;
@@ -67,4 +65,11 @@
 .detailBoxItem{
   display: flex;
   justify-content: space-between;
+}
+.coordinate{
+  display: inline-block;
+  margin: 5px 0 10px 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgb(172, 172, 172);
 }
