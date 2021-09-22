@@ -3,7 +3,7 @@ import "./App.css";
 import s from "./App.module.css";
 import { Route } from "react-router";
 import WeatherMonth from "./UI/WeatherMonth/WeatherMonth";
-import {WeatherTodayContainer} from "./UI/WeatherToday/WeatherTodayContainer";
+import WeatherTodayContainer from "./UI/WeatherToday/WeatherTodayContainer";
 import NavigationItemContainer from "./UI/NavigationItem/NavigationItemContainer";
 import { SettingsContainier } from "./UI/Settings/SettingsContainer";
 

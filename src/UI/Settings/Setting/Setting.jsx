@@ -4,19 +4,9 @@ import s from "./Setting.module.css";
 const Setting = (props) => {
   let inputLink = React.createRef();
   let setInput = (id) => {
-    debugger
     let value = inputLink.current.value;
     props.getCitiesInputSettingUI(id, value)
   };
-  // let setSettingType = (selectedType) => {
-  //   props.setSettingTypeUI(selectedType);
-  // };
-  
-  
-  // let setCoordsCity = (obj) => {
-  //   props.selected && props.setCoordsCityUI(obj);
-  // };
-
   return (
     <li className={s.settingsItem}>
       <input
@@ -28,10 +18,13 @@ const Setting = (props) => {
         readOnly
       />
       <div className={`${s.settingRight} ${props.selected && s.active}`}>
-        <span className={s.typeTitle}>{props.title}</span>
-        <span className={s.description}>{props.loading ? "загрузка..." : "✔"}</span>
-        <span className={s.description}>широта {props.coords.lat} , долгота {props.coords.lon}</span>
-        {props.error.status && <span className={s.typeTitle}>Ошибка: {props.error.description}</span>}
+        <div className={s.wrapperTitle}>
+          <span className={s.typeTitle}>{props.title}</span>
+          <span className={s.description}> координаты: {props.coords.lat}, {props.coords.lon}</span>
+        </div>
+        
+        <span className={s.loading}>{props.loading ? "..." : "✔"}</span>
+        {props.error.status && <span className={s.errors}>Ошибка: {props.error.description}</span>}
         {props.type === "input" && (
           <div className={s.inputCityContainer}>
             <div className={s.hintCityContainer}>

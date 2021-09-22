@@ -1,3 +1,70 @@
 .container{
   
 }
+.box{
+  position: relative;
+  display: flex;
+}
+.loadingWrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #fff;
+  opacity: 0;
+  pointer-events: none;
+  transition: all .13s ease;
+}
+.loadingWrapper.active{
+  opacity: 1;
+  pointer-events: all;
+}
+.loading{
+  width: 130px;
+  height: 130px;
+}
+.boxRight{
+  width: 40%;
+}
+.mainInfoTemp{
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 3px 3px 0px rgba(44, 44, 44, 0.178);
+}
+.temperature{
+  display: inline-block;
+  min-width: 40px;
+  
+  text-align: center;
+  padding: 10px;
+  font-size: 25px;
+  
+}
+.typeWeather{
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+.imageWeather{
+  width: 70px;
+  height: 70px;
+}
+.typeWeatherDescription{
+  font-size: 15px;
+  color: rgb(131, 131, 131);
+}
+
+.detailBox{
+  margin: 10px 0;
+}
+.detailBoxItem{
+  display: flex;
+  justify-content: space-between;
+}

@@ -6,7 +6,8 @@ const instanseAxiosWeather = axios.create({
   params: {
     lang: "ru",
     units: "metric",
-    appind: "a5ad12f0d63af840e7971a1142ba79d5",
+    exclude: "minutely,alerts",
+    appid: "5de3f2a0575c8acbacec8bfacf666bb5",
   },
 });
 
@@ -20,8 +21,15 @@ const instanseAxiosCity = axios.create({
 });
 
 let API = {
-  getWeatherToday(city) {
-    return instanseAxiosWeather.get(`weather?q=${city}`);
+  getWeatherCurrent(coords) {
+    let exclude = "minutely,alerts,daily";
+    return instanseAxiosWeather.get(`onecall?lat=${coords.lat}&lon=${coords.lon}&exclude=${exclude}`)
+  },
+  getWeatherDays(coords) {
+    let exclude = "current,hourly,minutely,alerts";
+    return instanseAxiosWeather.get(`onecall?lat=${coords.lat}&lon=${coords.lon}&exclude=${exclude}`).then(response => {
+      
+    })
   },
   getCity(input) {
     let params = {

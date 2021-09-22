@@ -1,11 +1,12 @@
 import { connect } from "react-redux";
-import { getCitiesInputSettingTC, getCoordinatesForCityTC, setSelectedSettingTC } from "../../BLL/reducers/reducer-settings";
+import { getCitiesInputSettingTC, getCoordinatesForCityTC, setSelectedSettingTC,setLocalStorageSettingsAC } from "../../BLL/reducers/reducer-settings";
 import Settings from "./Settings";
 
 const mapStateToProps = (state) =>{
   return {
     settingsTypes: state.settingsPage.settingsTypes,
-    buttonSave: state.settingsPage.buttonSave
+    buttonSave: state.settingsPage.buttonSave,
+    coordsSave: state.settingsPage.coordsSave
   }
 }
 const mapDispatchToProps = (dispatch) =>{
@@ -18,6 +19,9 @@ const mapDispatchToProps = (dispatch) =>{
     },
     getCoordinatesForCityUI: (id, hintsObj) => {
       dispatch(getCoordinatesForCityTC(id, hintsObj))
+    },
+    setLocalStorageSettingsUI: () => {
+      dispatch(setLocalStorageSettingsAC())
     }
   }
 }

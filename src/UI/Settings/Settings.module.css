@@ -1,5 +1,4 @@
 .container{
-  
   padding: 20px;
 }
 .settingsList{
@@ -7,22 +6,26 @@
   margin: 0 0 20px 0;
   padding: 0;
 }
-
+.title{
+  
+}
+.coordinate{
+  display: inline-block;
+  margin: 5px 0 10px 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgb(172, 172, 172);
+}
 .buttonSave{
   position: absolute;
   bottom: 20px;
   display: inline-block;
   border: none;
   padding: 7px 15px;
-
   border-radius: 3px;
   background-color: rgb(23, 104, 211);
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  color: #fff;
-  font-weight: 500;
-  font-size: 15px;
-  text-transform: lowercase;
   transition: all .15s ease;
 }
 .buttonSave:hover{
@@ -33,7 +36,16 @@
   pointer-events: none;
   cursor: none;
 }
+.buttonSavelink{
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: lowercase;
+  text-decoration: none;
+  color: #fff;
+}
 .title{
+  display: inline-block;
   margin-top: 0;
   font-size: 20px;
+  margin: 10px 10px 5px 0;
 }
