@@ -1,10 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,400&display=swap');
+
+:root {
+  --accent-color: rgb(29, 80, 235);
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Roboto', sans-serif;
+  background-color: rgb(255, 255, 255);
+  color: rgb(41, 41, 41);
 }
 
 code {
@@ -12,3 +16,24 @@ code {
     monospace;
 }
 
+button{
+  border: none;
+  padding: none;
+  outline: none;
+  cursor: pointer;
+}
+button:disabled{
+  background-color: rgb(148, 148, 148);
+}
+a{
+  text-decoration: none;
+  color: rgb(41, 41, 41);
+}
+ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+h3{
+  margin-top: 0;
+}

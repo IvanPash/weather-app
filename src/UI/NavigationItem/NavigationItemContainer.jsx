@@ -6,18 +6,18 @@ import { getAllWeatherTC } from "../../BLL/reducers/reducer-weather";
 import NavigationItem from "./NavigationItem";
 
 class NavigationItemContainer extends React.Component {
-  componentDidMount(){
-    this.props.getAllWeatherUI(this.props.coordsSave)
+  componentDidMount() {
+    this.props.getAllWeatherUI(this.props.coordsSave);
   }
   render() {
-    return <NavigationItem links={this.props.links} ChangeLinkUI={this.props.ChangeLinkUI}/>;
+    return <NavigationItem links={this.props.links} ChangeLinkUI={this.props.ChangeLinkUI} />;
   }
 }
 
 const mapStateToProps = (state) => {
   return {
     links: state.navigation.links,
-    coordsSave:  state.settingsPage.coordsSave
+    coordsSave: state.settingsPage.coordsSave,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -26,8 +26,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(ChangeLinkAC(id));
     },
     getAllWeatherUI: (coordsSave) => {
-      dispatch(getAllWeatherTC(coordsSave))
-    }
+      dispatch(getAllWeatherTC(coordsSave));
+    },
   };
 };
 

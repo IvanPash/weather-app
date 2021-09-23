@@ -5,12 +5,12 @@
   color: rgb(39, 39, 39);
   margin-right: 10px;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
   padding: 5px 10px;
   border-radius: 3px;
   transition: all .2s ease;
 }
 .linkItem:hover,
 .linkItem.active{
-  background-color: rgb(241, 239, 239);
+  background-color: rgb(216, 216, 216);
 }

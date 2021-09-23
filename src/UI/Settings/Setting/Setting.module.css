@@ -85,3 +85,11 @@
   top: 0px;
   opacity: 0.4;
 }
+.errors{
+  display:inline-block;
+  margin-top: 3px;
+  font-size: 13px;
+  color: rgb(131, 23, 23);
+  font-weight: 500;
+  text-transform: lowercase;
+}

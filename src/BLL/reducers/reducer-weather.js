@@ -48,15 +48,6 @@ const setWeatherCityAC = (city) => ({ type: SET_CITY_WEATHER, city });
 
 // ThunkCreators
 export const getWeatherCurrentTC = (coords) => (dispatch) => {
-  // dispatch(setLoadingAC(true))
-  // API.getWeatherCurrent(coords).then((response) => {
-  //   dispatch(setWeatherCurrentAC(response.data.current));
-
-  //   API.getCityCoords(coords).then((response) => {
-  //     dispatch(setWeatherCityAC(response.data.suggestions[0].data.city))
-  //     dispatch(setLoadingAC(false))
-  //   });
-  // });
 };
 export const getAllWeatherTC = (coords) => (dispatch) => {
   if(!coords.lat) return

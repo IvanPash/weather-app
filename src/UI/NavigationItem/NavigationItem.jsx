@@ -2,7 +2,6 @@ import { NavLink } from "react-router-dom";
 import s from "./NavigationItem.module.css";
 
 const NavigationItem = (props) => {
-  
   return (
     <ul className={s.linksList}>
       {props.links.map((el) => (
@@ -12,6 +11,7 @@ const NavigationItem = (props) => {
           onClick={() => props.ChangeLinkUI(el.id)}
           className={s.linkItem}
           activeClassName={s.active}
+          exact={el.exact}
         >
           {el.text}
         </NavLink>

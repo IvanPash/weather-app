@@ -10,13 +10,11 @@ const WeatherMonth = (props) => {
         </div>
         <div>
           <h3 className={s.mainInfoCity}>{props.city}</h3>
-          
-          {/* <span className={s.coordinate}>
-            погода по координатам: широта {props.coords.lat} , долгота {props.coords.lon}
-          </span> */}
         </div>
         <div className={s.wrapperItems}>
-          {props.daily.map(el => <WeatherMonthItem daily={el}/>)}
+          {props.daily.map((el) => (
+            <WeatherMonthItem daily={el} />
+          ))}
         </div>
       </div>
     );

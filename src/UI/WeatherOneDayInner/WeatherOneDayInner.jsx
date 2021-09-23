@@ -1,7 +1,7 @@
 import { Route, Switch, useRouteMatch } from "react-router";
 import { Link } from "react-router-dom";
 import WeatherOneDay from "./WeatherOneDay/WeatherOneDay";
-import s from "./WeatherOneDayInner.module.css"
+import s from "./WeatherOneDayInner.module.css";
 
 const WeatherOneDayInner = (props) => {
   const match = useRouteMatch();
@@ -26,7 +26,10 @@ const WeatherOneDayInner = (props) => {
           Сегодня
         </Link>
       </button>
-      <button className={`${s.buttonChangeDay} ${s.buttonChangeDay_right}`} disabled={props.daily.length > +match.params.id + 1 ? false : true}>
+      <button
+        className={`${s.buttonChangeDay} ${s.buttonChangeDay_right}`}
+        disabled={props.daily.length > +match.params.id + 1 ? false : true}
+      >
         <Link className={s.buttonChangeDayLink} to={`/oneday/${+match.params.id + 1}`}>
           Следующий день
         </Link>

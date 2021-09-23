@@ -9,7 +9,7 @@
 
 .app{
   width: 700px;
-  background-color: #fff;
+  background-color: rgb(238, 238, 238);
   box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   overflow: hidden;
@@ -31,5 +31,5 @@
 .containerPage{
   position: relative;
   min-height: 350px;
-  background-color: rgb(245, 243, 243);
+  background-color: rgb(255, 255, 255);
 }

@@ -32,9 +32,9 @@
   display: flex;
   align-items: center;
   margin: 10px 0;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0px 3px 3px 0px rgba(44, 44, 44, 0.178);
+  /* background-color: rgb(199, 207, 218); */
+  border-radius: 2px;
+  border: 1px solid rgb(221, 221, 221);
 }
 .temperature{
   display: inline-block;
@@ -43,7 +43,7 @@
   text-align: center;
   padding: 10px;
   font-size: 25px;
-  
+  font-weight: 600;
 }
 .typeWeather{
   display: flex;
@@ -56,7 +56,7 @@
 }
 .typeWeatherDescription{
   font-size: 15px;
-  color: rgb(131, 131, 131);
+  color: rgb(80, 80, 80);
 }
 
 .detailBox{
@@ -72,4 +72,39 @@
   font-size: 13px;
   font-weight: 600;
   color: rgb(172, 172, 172);
+}
+.moreInfoList{
+  margin: 15px 0;
+  border-radius: 2px;
+  border: 1px solid rgb(221, 221, 221);
+  padding: 13px 10px 5px 10px;
+}
+.moreInfoItem{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.moreInfoTitle{
+  font-size: 14px;
+  font-weight: 500;
+}
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.date{
+  display: inline-block;
+  font-size: 15px;
+  color: rgb(128, 128, 128);
+  margin-left: 10px;
+  font-weight: 600;
+}
+.titleCity{
+  display: inline-block;
+  margin-bottom: 0px;
+}
+.moreInfoValue{
+  font-weight: 500;
+  font-size: 15px;
 }

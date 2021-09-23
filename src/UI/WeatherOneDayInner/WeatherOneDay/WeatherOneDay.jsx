@@ -2,18 +2,32 @@ import React from "react";
 import s from "./WeatherOneDay.module.css";
 
 let WeatherOneDay = (props) => {
+  debugger;
   let ConvertTemperature = (temp) => {
     let integer = Math.floor(temp);
     if (integer > 0) return "+" + integer;
     if (integer < 0) return "+" + integer;
     else return integer;
   };
-  let DateFunc = (date, type) => {
-    var timestamp = date;
-    var a = new Date(timestamp * 1000);
-    var days = ["пн", "вт", "ср", "чт", "пт", "сб", "вс"];
-    if (type == "dayWeek") return days[a.getDay()];
-    else return a.getDate();
+  let DateFunc = (date) => {
+    let timestamp = date;
+    let a = new Date(timestamp * 1000);
+    let days = ["пн", "вт", "ср", "чт", "пт", "сб", "вс"];
+    let month = [
+      "января",
+      "февраля",
+      "марта",
+      "апреля",
+      "мая",
+      "июня",
+      "июля",
+      "августа",
+      "сентября",
+      "октября",
+      "ноября",
+      "декабря",
+    ];
+    return `${days[a.getDay()]} ${a.getDate()}, ${month[a.getMonth()]}`;
   };
   if (props.daily) {
     return (
@@ -24,19 +38,18 @@ let WeatherOneDay = (props) => {
 
         <div className={s.boxRight}>
           <div className={s.mainInfo}>
-            <div>
-              <h3 className={s.mainInfoCity}>{props.city}</h3>
-            </div>
-            <div>
-              <span className={`${s.day} ${s.dayNumber}`}>{DateFunc(props.daily.sunrise)}</span>
-              <span className={s.day}>{DateFunc(props.daily.sunrise, "dayWeek")}</span>
+            <div className={s.header}>
+              <h3 className={s.titleCity}>{props.city}</h3>
+              <span className={s.date}>{DateFunc(props.daily.sunrise)}</span>
             </div>
             <div className={s.mainInfoTemp}>
               <span className={s.temperature}>{ConvertTemperature(props.daily.temp.day)}</span>
               <div className={s.typeWeather}>
                 <img
                   className={s.imageWeather}
-                  src={`http://openweathermap.org/img/wn/${props.daily.weather && props.daily.weather[0].icon}@2x.png`}
+                  src={`http://openweathermap.org/img/wn/${
+                    props.daily.weather && props.daily.weather[0].icon
+                  }@2x.png`}
                   alt={props.daily.weather && props.daily.weather.description}
                 />
                 <span className={s.typeWeatherDescription}>
@@ -44,6 +57,28 @@ let WeatherOneDay = (props) => {
                 </span>
               </div>
             </div>
+            <ul className={s.moreInfoList}>
+              <li className={s.moreInfoItem}>
+                <span className={s.moreInfoTitle}>по ощущению</span>
+                <span className={s.moreInfoValue}>{ConvertTemperature(props.daily.feels_like.day)} </span>
+              </li>
+              <li className={s.moreInfoItem}>
+                <span className={s.moreInfoTitle}>ветер</span>
+                <span className={s.moreInfoValue}>
+                  {props.daily.wind_speed} <small>м/с</small>
+                </span>
+              </li>
+              <li className={s.moreInfoItem}>
+                <span className={s.moreInfoTitle}>давление</span>
+                <span className={s.moreInfoValue}>
+                  {Math.floor(props.daily.pressure * 0.75006375541921)} <small>мм.рт.ст.</small>
+                </span>
+              </li>
+              <li className={s.moreInfoItem}>
+                <span className={s.moreInfoTitle}>влажность</span>
+                <span className={s.moreInfoValue}>{props.daily.humidity}%</span>
+              </li>
+            </ul>
           </div>
         </div>
         <div className={s.boxLeft}></div>

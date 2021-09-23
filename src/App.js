@@ -20,7 +20,7 @@ function App(props) {
         <div className={s.containerPage}>
           <Route path="/oneday/:id" render={() => <WeatherOneDayInnerContainer />} />
           <Route path="/month" render={() => <WeatherMonthContainer />} />
-          <Route path="/settings" render={() => <SettingsContainier />} />
+          <Route exact path="/" render={() => <SettingsContainier />} />
         </div>
       </div>
     </div>

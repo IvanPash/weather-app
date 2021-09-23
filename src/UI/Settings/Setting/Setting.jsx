@@ -5,7 +5,7 @@ const Setting = (props) => {
   let inputLink = React.createRef();
   let setInput = (id) => {
     let value = inputLink.current.value;
-    props.getCitiesInputSettingUI(id, value)
+    props.getCitiesInputSettingUI(id, value);
   };
   return (
     <li className={s.settingsItem}>
@@ -20,9 +20,12 @@ const Setting = (props) => {
       <div className={`${s.settingRight} ${props.selected && s.active}`}>
         <div className={s.wrapperTitle}>
           <span className={s.typeTitle}>{props.title}</span>
-          <span className={s.description}> координаты: {props.coords.lat}, {props.coords.lon}</span>
+          <span className={s.description}>
+            {" "}
+            координаты: {props.coords.lat}, {props.coords.lon}
+          </span>
         </div>
-        
+
         <span className={s.loading}>{props.loading ? "..." : "✔"}</span>
         {props.error.status && <span className={s.errors}>Ошибка: {props.error.description}</span>}
         {props.type === "input" && (
@@ -53,16 +56,3 @@ const Setting = (props) => {
 };
 
 export default Setting;
-
-// <li className={s.settingsItem}>
-//           <input
-//             className={s.settingLeft}
-//             id="type"
-//             type="radio"
-//             checked={props.selectedType == "search" && true}
-//           />
-//           <div className={s.settingRight}>
-//             <span className={s.typeTitle}>Найти город</span>
-//             <input className={s.settingLeft} id="city" type="text" placeholder="Поиск города" />
-//           </div>
-//         </li>
