@@ -1,0 +1,38 @@
+.box{
+  width: 157px;
+  margin: 0 5px 10px 5px;
+  background-color: rgb(199 207 218);
+  border-radius: 5px;
+  padding: 5px 10px;
+  box-sizing: border-box;
+}
+.typeWeather{
+  display: flex;
+  justify-content: space-between;
+}
+.imageWeather{
+  width: 60px;
+  height: 60px;
+  transform: scale(1.6);
+}
+.temperature{
+  display: block;
+  text-align: right;
+  font-weight: 600;
+}
+.tempDescription{
+  font-size: 12px;
+  color: rgba(14, 14, 14, 0.466);
+}
+.day{
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(31, 31, 31, 0.548);
+}
+.dayNumber{
+  display:inline-block;
+  font-size: 15px;
+  margin-right: 3px;
+  font-weight: 700;
+  color: rgba(31, 31, 31, 0.918);
+}

@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import { getCitiesInputSettingTC, getCoordinatesForCityTC, setSelectedSettingTC,setLocalStorageSettingsAC } from "../../BLL/reducers/reducer-settings";
+import { getAllWeatherTC } from "../../BLL/reducers/reducer-weather";
 import Settings from "./Settings";
 
 const mapStateToProps = (state) =>{
@@ -22,6 +23,9 @@ const mapDispatchToProps = (dispatch) =>{
     },
     setLocalStorageSettingsUI: () => {
       dispatch(setLocalStorageSettingsAC())
+    },
+    getAllWeatherUI: (coords) => {
+      dispatch(getAllWeatherTC(coords))
     }
   }
 }

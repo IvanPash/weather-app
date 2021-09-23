@@ -1,0 +1,33 @@
+.buttonChangeDay{
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  padding: 0;
+  width: 50%;
+  display: inline-block;
+  border: none;
+  background-color: rgb(23, 104, 211);
+  cursor: pointer;
+  transition: all .15s ease;
+}
+.buttonChangeDay_right{
+  left: initial;
+  right: 0;
+}
+.buttonChangeDay:disabled {
+  background-color: rgb(192, 192, 192);
+  pointer-events: none;
+  cursor: none;
+}
+
+.buttonChangeDayLink{
+  display: inline-block;
+  padding: 12px 15px;
+  width: 100%;
+  box-sizing: border-box;
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: lowercase;
+  text-decoration: none;
+  color: #fff;
+}

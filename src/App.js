@@ -2,10 +2,10 @@ import logo from "./logo.svg";
 import "./App.css";
 import s from "./App.module.css";
 import { Route } from "react-router";
-import WeatherMonth from "./UI/WeatherMonth/WeatherMonth";
-import WeatherTodayContainer from "./UI/WeatherToday/WeatherTodayContainer";
+import WeatherMonthContainer from "./UI/WeatherMonth/WeatherMonthContainer";
 import NavigationItemContainer from "./UI/NavigationItem/NavigationItemContainer";
 import { SettingsContainier } from "./UI/Settings/SettingsContainer";
+import WeatherOneDayInnerContainer from "./UI/WeatherOneDayInner/WeatherOneDayInnerContainer";
 
 function App(props) {
   return (
@@ -18,8 +18,8 @@ function App(props) {
           </nav>
         </div>
         <div className={s.containerPage}>
-          <Route path="/oneday" render={() => <WeatherTodayContainer />} />
-          <Route path="/month" render={() => <WeatherMonth />} />
+          <Route path="/oneday/:id" render={() => <WeatherOneDayInnerContainer />} />
+          <Route path="/month" render={() => <WeatherMonthContainer />} />
           <Route path="/settings" render={() => <SettingsContainier />} />
         </div>
       </div>

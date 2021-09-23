@@ -3,6 +3,10 @@ import Setting from "./Setting/Setting";
 import s from "./Settings.module.css";
 
 const Settings = (props) => {
+  let saveSettings = () => {
+    props.setLocalStorageSettingsUI()
+    props.getAllWeatherUI(props.coordsSave)
+  }
   return (
     <div className={s.container}>
       <h4 className={s.title}>Настройки</h4>
@@ -22,7 +26,7 @@ const Settings = (props) => {
       </ul>
       <div className={s.buttonSaveContainer}>
       <button disabled={props.buttonSave} className={s.buttonSave}>
-          <NavLink to="/oneday" onClick={() => props.setLocalStorageSettingsUI()} className={s.buttonSavelink}> 
+          <NavLink to="/oneday/0" onClick={() => saveSettings()} className={s.buttonSavelink}> 
             Сохранить
           </NavLink>
         </button>

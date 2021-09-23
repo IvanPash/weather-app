@@ -2,7 +2,7 @@ const CHANGE_LINK = "CHANGE-LINK"
 
 const initState = {
   links: [
-    {id: 1, active: false, link: "/oneday", text: "На сегодня"},
+    {id: 1, active: false, link: "/oneday/0", text: "На сегодня"},
     {id: 2, active: false, link: "/month", text: "На месяц", },
     {id: 3, active: false, link: "/settings", text: "настройки"}
   ]

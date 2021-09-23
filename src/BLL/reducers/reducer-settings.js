@@ -50,11 +50,13 @@ let reducerSettings = (state = initState, action) => {
           ...state.settingsTypes.map((el) => {
             if (el.id === action.id) {
               return { ...el, selected: true };
+              
             } else {
               return { ...el, selected: false };
             }
           }),
         ],
+        
       };
       return stateCopy;
     }
@@ -147,7 +149,6 @@ let reducerSettings = (state = initState, action) => {
       let stateCopy = { ...state };
       let selectIdSetting = state.settingsTypes.findIndex((index) => index.id === action.id);
       let coords = state.settingsTypes[selectIdSetting].coords;
-      debugger
       if (coords.lon && coords.lat) {
         stateCopy.buttonSave = false;
       } else {
@@ -157,11 +158,15 @@ let reducerSettings = (state = initState, action) => {
     }
     case SET_LOCAL_STORAGE_SETTINGS: {
       let stateCopy = {...state}
-      let selectIdSetting = state.settingsTypes.findIndex((index) => index.selected === true);
-      let coords = state.settingsTypes[selectIdSetting].coords;
-      stateCopy.coordsSave = {lat: coords.lat, lon:coords.lon}
       localStorage.removeItem("settings");
       localStorage.setItem("settings", JSON.stringify(stateCopy));   
+      return stateCopy
+    }
+    case SET_COORDS_SAVE: {
+      let stateCopy = {...state}
+      let selectIdSetting = state.settingsTypes.findIndex((index) => index.selected === true);
+      let coords = state.settingsTypes[selectIdSetting].coords;
+      stateCopy.coordsSave = {lat: coords.lat, lon: coords.lon}
       return stateCopy
     }
     default:
@@ -178,6 +183,7 @@ const SET_INPUT_VALUE_SETTING = "SET_INPUT_VALUE_SETTING";
 const SET_HINTS_SETTING = "SET_HINTS_SETTING";
 const SET_SAVE_BUTTON_SETTING = "SET_SAVE_BUTTON_SETTING";
 const SET_LOCAL_STORAGE_SETTINGS = "SET_LOCAL_STORAGE_SETTINGS";
+const SET_COORDS_SAVE = "SET_COORDS_SAVE"
 
 // ActionCreators
 export const setSelectedSettingAC = (id) => ({ type: SET_SELECTED_SETTING, id });
@@ -188,6 +194,7 @@ export const setInputValueSettingAC = (id, value) => ({ type: SET_INPUT_VALUE_SE
 export const setHintsSettingAC = (id, hintsArray) => ({ type: SET_HINTS_SETTING, id, hintsArray });
 export const setSaveButtonSettingAC = (id) => ({ type: SET_SAVE_BUTTON_SETTING, id });
 export const setLocalStorageSettingsAC = () => ({ type: SET_LOCAL_STORAGE_SETTINGS });
+export const setCoordsSaveAC = () => ({ type: SET_COORDS_SAVE });
 
 // ThunkCreators
 export const getCitiesInputSettingTC = (id, value) => (dispatch) => {
@@ -209,15 +216,16 @@ export const getCitiesInputSettingTC = (id, value) => (dispatch) => {
       }
       dispatch(setHintsSettingAC(id, hintsCity));
       dispatch(setLoadingStatusSettingAC(id, false));
-      
     });
   }
+  dispatch(setCoordsSaveAC())
 };
 export const getCoordinatesForCityTC = (id, hintsObj) => (dispatch) => {
   dispatch(setInputValueSettingAC(id, hintsObj.value));
   dispatch(setCoordsSettingAC(id, hintsObj.data.lat, hintsObj.data.lon));
   dispatch(setHintsSettingAC(id, []));
   dispatch(setSaveButtonSettingAC(id));
+  dispatch(setCoordsSaveAC())
 };
 export const setSelectedSettingTC = (id, typeSetting) => (dispatch) => {
   if (typeSetting == "ip") {
@@ -227,16 +235,17 @@ export const setSelectedSettingTC = (id, typeSetting) => (dispatch) => {
       dispatch(setCoordsSettingAC(id, position.coords.latitude, position.coords.longitude));
       dispatch(setLoadingStatusSettingAC(id, false));
       dispatch(setSaveButtonSettingAC(id));
+      dispatch(setErrorSettingAC(id, false));
+      dispatch(setCoordsSaveAC())
     };
     let PositionError = (error) => {
       dispatch(setLoadingStatusSettingAC(id, false));
       dispatch(setCoordsSettingAC(id, "", "", true));
       dispatch(setErrorSettingAC(id, true, "Вы не разрешили использовать службу геолокации"));
       console.log(`ERROR(${error.code}): ${error.message}`);
-      dispatch(setSaveButtonSettingAC(id));
     };
     if (navigator.geolocation) {
-      dispatch(setErrorSettingAC(id, false));
+      
       navigator.geolocation.getCurrentPosition(PositionSucces, PositionError);
     } else {
       dispatch(setErrorSettingAC(id, true, "Ваш браузер не поддерживает"));
@@ -246,7 +255,10 @@ export const setSelectedSettingTC = (id, typeSetting) => (dispatch) => {
   } else {
     dispatch(setSelectedSettingAC(id));
     dispatch(setSaveButtonSettingAC(id));
+    dispatch(setCoordsSaveAC())
   }
+  
 };
+
 
 export default reducerSettings;
